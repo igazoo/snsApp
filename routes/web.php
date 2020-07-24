@@ -25,3 +25,5 @@ Route::post('posts/store' ,'PostController@store')->name('posts.store');
 Route::get('posts/edit/{id}','PostController@edit')->name('posts.edit');
 Route::post('posts/update/{id}','PostController@update')->name('posts.update');
 Route::post('posts/destroy/{id}', 'PostController@destroy')->name('posts.destroy');
+Route::get('posts/unlike/{id}' ,'PostController@like')->name('posts.like');
+Route::get('posts/like/{id}' , 'PostController@unlike')->name('posts.unlike');
