@@ -6,9 +6,45 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Services\SaveImagesServices;
+use App\Models\Like;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    //only()の引数内のメソッドはログイン時のみ有効
+    public function __construct(){
+      $this->middleware(['auth' , 'verified'])->only(['like' ,'unlike']);
+    }
+
+    /**
+      * 引数のIDに紐づくリプライにLIKEする
+      *
+      * @param $id リプライID
+      * @return \Illuminate\Http\RedirectResponse
+      */
+      //いいねメソッド
+      public function like($id)
+      {
+          Like::create([
+            'post_id' =>$id,
+            'user_id' =>Auth::id()
+          ]);
+          session()->flash('いいね');
+          return redirect()->back();
+      }
+      //いいね解除メソッド
+
+      public function unlike($id)
+      {
+        $like = Like::where('post_id',$id)->where('user_id',Auth::id())
+        ->first();
+        $like->delete();
+
+        session()->flash('いいねを外しました');
+        return redirect()->back();
+
+      }
+
     /**
      * Display a listing of the resource.
      *
