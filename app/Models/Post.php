@@ -13,16 +13,21 @@ class Post extends Model
       return $this->hasMany('App\Models\Like', 'post_id');//外部キーとしてpost_idを使用
     }
 
-    public function is_liked_by_auth_user()
+    public function comments()
     {
-      $id = Auth::id();
+      return $this->hasMany('App\Models\Comment', 'post_id');
+    }
+
+    public function is_liked_by_auth_user()//ログインユーザーがいいねしているかの判定メソッド
+    {
+      $id = Auth::id();//ログインユーザー
       $likers = [];
 
       foreach($this->likes as $like){
-        array_push($likers , $like->user_id);
+        array_push($likers , $like->user_id);//紐づいているユーザーIDを配列にいれる
       }
 
-      if(in_array($id , $likers)){
+      if(in_array($id , $likers)){//もし配列にログインユーザーIDがあれは真なければ偽
         return true;
       }else{
         return false;

@@ -22,8 +22,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('posts/index', 'PostController@index')->name('posts.index');
 Route::get('posts/create' , 'PostController@create')->name('posts.create');
 Route::post('posts/store' ,'PostController@store')->name('posts.store');
+Route::get('posts/show/{id}', 'PostController@show')->name('posts.show');
 Route::get('posts/edit/{id}','PostController@edit')->name('posts.edit');
 Route::post('posts/update/{id}','PostController@update')->name('posts.update');
 Route::post('posts/destroy/{id}', 'PostController@destroy')->name('posts.destroy');
 Route::get('posts/unlike/{id}' ,'PostController@like')->name('posts.like');
 Route::get('posts/like/{id}' , 'PostController@unlike')->name('posts.unlike');
+
+Route::post('comments/store', 'CommentController@store')->name('comments.store');

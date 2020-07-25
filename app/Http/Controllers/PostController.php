@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Services\SaveImagesServices;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Comment;
 
 class PostController extends Controller
 {
@@ -53,8 +54,9 @@ class PostController extends Controller
     public function index()
     {
         //
+        $user = Auth::user();
         $posts = Post::all();
-        return view('posts.index',compact('posts'));
+        return view('posts.index',compact('posts' ,'user'));
     }
 
     /**
@@ -98,6 +100,11 @@ class PostController extends Controller
     public function show($id)
     {
         //
+        $post = Post::find($id);
+        $user = Auth::user();
+
+
+        return view('posts.show',compact('post','user'));
     }
 
     /**
