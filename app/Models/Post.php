@@ -18,6 +18,13 @@ class Post extends Model
       return $this->hasMany('App\Models\Comment', 'post_id');
     }
 
+    protected $fillable = ['user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     public function is_liked_by_auth_user()//ログインユーザーがいいねしているかの判定メソッド
     {
       $id = Auth::id();//ログインユーザー

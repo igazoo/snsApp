@@ -54,9 +54,9 @@ class PostController extends Controller
     public function index()
     {
         //
-        $user = Auth::user();
+
         $posts = Post::all();
-        return view('posts.index',compact('posts' ,'user'));
+        return view('posts.index',compact('posts' ));
     }
 
     /**
@@ -86,6 +86,7 @@ class PostController extends Controller
         $post->image = basename($filename);
 
         $post->content = $request->input('content');
+        $post->user_id = Auth::id();
         $post->save();
 
         return redirect('posts/index');
