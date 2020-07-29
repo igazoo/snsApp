@@ -30,3 +30,10 @@ Route::get('posts/unlike/{id}' ,'PostController@like')->name('posts.like');
 Route::get('posts/like/{id}' , 'PostController@unlike')->name('posts.unlike');
 
 Route::post('comments/store', 'CommentController@store')->name('comments.store');
+
+Route::get('user/index','UserController@index')->name('user.index');
+
+
+// フォロー/フォロー解除を追加
+Route::post('users/follow/{id}', 'UsersController@follow')->name('follow');
+Route::delete('users/unfollow/{id}', 'UsersController@unfollow')->name('unfollow');
