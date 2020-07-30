@@ -2,19 +2,20 @@
 
 @section('content')
 @foreach($users as $user)
+@if(Auth::id() != $user->id )
 <div class="row justify-content-center">
   <div class="col-md-6">
     <div class="card">
       <div class="card-header">{{$user->name}}
       </div>
       <div class="card-body text-center">
-        @if (auth()->user()->isFollowed($user->id))
+        @if (Auth::user()->isFollowed($user->id))
         <div class="px-2">
           <span class="px-1 bg-secondary text-light">フォローされています</span>
         </div>
         @endif
         <div class="d-flex justify-content-end flex-grow-1">
-          @if (auth()->user()->isFollowing($user->id))
+          @if (Auth::user()->isFollowing($user->id))
           <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
@@ -33,5 +34,7 @@
       </div>
     </div>
   </div>
+</div>
+  @endif
   @endforeach
   @endsection
