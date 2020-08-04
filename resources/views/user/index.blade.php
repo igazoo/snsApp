@@ -2,7 +2,7 @@
 
 @section('content')
 @foreach($users as $user)
-@if($user->id != Auth::id())
+@if(Auth::id() != $user->id )
 <div class="row justify-content-center">
   <div class="col-md-6">
     <div class="card">

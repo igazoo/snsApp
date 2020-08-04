@@ -31,14 +31,10 @@ Route::get('posts/like/{id}' , 'PostController@unlike')->name('posts.unlike');
 
 Route::post('comments/store', 'CommentController@store')->name('comments.store');
 
-// ログイン状態
-Route::group(['middleware' => 'auth'], function() {
+Route::get('users/index','UsersController@index')->name('user.index');
+Route::get('users/show/{id}', 'UsersController@show')->name('user.show');
 
-    // ユーザ関連
-    Route::resource('users', 'UsersController', ['only' => ['index']]);
 
-    // フォロー/フォロー解除を追加
-    Route::post('users/follow/{id}', 'UsersController@follow')->name('follow');
-    Route::delete('users/unfollow/{id}', 'UsersController@unfollow')->name('unfollow');
-
-});
+// フォロー/フォロー解除を追加
+Route::post('users/follow/{id}', 'UsersController@follow')->name('follow');
+Route::delete('users/unfollow/{id}', 'UsersController@unfollow')->name('unfollow');

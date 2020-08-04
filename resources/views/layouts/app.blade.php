@@ -69,7 +69,8 @@
               <a class="dropdown-item" href="{{route('posts.create')}}">
                 新規投稿
               </a>
-              <a　class="dropdown-item" href="{{route('users.index')}}">ユーザー一覧</a>
+              <a  class="dropdown-item" href="{{route('user.index')}}">ユーザー一覧</a>
+              <a  class="dropdown-item" href="{{route('user.show',['id' => Auth::id()])}}">プロフィール</a>
             </div>
           </li>
           @endguest
